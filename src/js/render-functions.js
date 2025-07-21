@@ -54,7 +54,7 @@ export function createGallery(images) {
     })
     .join('');
 
-  galleryContainer.innerHTML = markup;
+  galleryContainer.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh(); 
 }
 
@@ -71,4 +71,25 @@ export function showLoader() {
 
 export function hideLoader() {
   loader.classList.add('hidden');
+}
+
+const loadMoreBtn = document.querySelector('.load-more');
+
+export function showLoadMoreButton() {
+  loadMoreBtn.classList.remove('hidden');
+}
+
+export function hideLoadMoreButton() {
+  loadMoreBtn.classList.add('hidden');
+}
+
+export function scrollGallery() {
+  const firstCard = document.querySelector('.gallery-item');
+  if (!firstCard) return;
+
+  const { height: cardHeight } = firstCard.getBoundingClientRect();
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
 }
